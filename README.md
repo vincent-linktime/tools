@@ -53,7 +53,9 @@ python -m tools.image2video.app
 
 1. **Upload an Image:**  
    Use the interface to upload an image (PNG or JPG).
-2. **Click "Run":**  
+2. **Input a Prompt**
+   Provide a custom prompt about the image or desired video content.
+3. **Click "Run":**  
    The tool will process the image and generate a video.
 3. **Play the Resulting Video:**  
    Once the conversion is complete, the generated video will be available to play.

@@ -1,9 +1,9 @@
 import gradio as gr
 from tools.image2video.image_to_video_converter import ImageToVideoConverter
 
-def convert_image_to_video(image_path: str):
+def convert_image_to_video(image_path: str, prompt: str):
     """
-    Generator function that converts an image to a video.
+    Generator function that converts an image to a video using the provided prompt.
     
     Yields:
       - A "Processing..." status message and no video immediately.
@@ -11,6 +11,7 @@ def convert_image_to_video(image_path: str):
     
     Parameters:
       image_path (str): The file path of the uploaded image.
+      prompt (str): The text prompt for video conversion.
     """
     # Immediately update the status to "Processing..."
     yield "Processing...", None
@@ -22,8 +23,8 @@ def convert_image_to_video(image_path: str):
         # Define an output path for the generated video.
         output_video_path = "output/video.mp4"
         
-        # Run the conversion (this may take a while depending on your API call)
-        image_to_video_converter.convert(image_path, output_video_path)
+        # Run the conversion using the provided prompt
+        image_to_video_converter.convert(image_path, prompt, output_video_path)
         
         # Once complete, yield an empty status and the video file path
         yield "", output_video_path
@@ -42,11 +43,19 @@ with gr.Blocks(theme=gr.themes.Origin()) as demo:
             width=512
         )
     
-    # Row 2: Run button
+    # Row 2: Prompt input
+    with gr.Row():
+        prompt_input = gr.Textbox(
+            label="Prompt", 
+            value="", 
+            placeholder="Enter a prompt or leave blank to auto-generate"
+        )
+    
+    # Row 3: Run button
     with gr.Row():
         run_conversion_button = gr.Button("Run")
     
-    # Row 3: Status message and video output (reduced video size)
+    # Row 4: Status message and video output (reduced video size)
     with gr.Row():
         with gr.Column():
             status_message = gr.Markdown(value="")
@@ -59,7 +68,7 @@ with gr.Blocks(theme=gr.themes.Origin()) as demo:
     # Wire the run button to the convert_image_to_video generator function.
     run_conversion_button.click(
         fn=convert_image_to_video,
-        inputs=[uploaded_image],
+        inputs=[uploaded_image, prompt_input],
         outputs=[status_message, video_player],
         show_progress=True
     )
