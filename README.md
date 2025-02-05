@@ -53,9 +53,12 @@ python -m tools.image2video.app
 
 1. **Upload an Image:**  
    Use the interface to upload an image (PNG or JPG).
-2. **Input a Prompt**
-   Provide a custom prompt about the image or desired video content.
-3. **Click "Run":**  
+2. **Input a Prompt**  
+    Provide a custom prompt about the image or desired video content.
+3. **Choose a Model**  
+    Select either "Replicate" (using the kwaivgi/kling-v1.6-standard model hosted via the Replicate API) or "Stability" (utilizing the Stable Video 1.1 model).  
+    **Note that:** The "Stability" model accepts only images with the following dimensions: 1024x576, 576x1024, or 768x768.
+4. **Click "Run":**  
    The tool will process the image and generate a video.
 3. **Play the Resulting Video:**  
    Once the conversion is complete, the generated video will be available to play.
