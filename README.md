@@ -41,6 +41,7 @@ Before running the tool, set your Replicate API token as an environment variable
 
 ```bash
 export REPLICATE_API_TOKEN=your_replicate_api_token
+export STABILITY_AI_API_KEY=your_stability_ai_api_key
 ```
 
 Then, launch the tool with:
