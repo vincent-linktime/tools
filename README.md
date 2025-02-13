@@ -37,11 +37,15 @@ Follow these steps to set up your development environment using Conda:
 
 ## Running the Image2Video Tool
 
-Before running the tool, set your Replicate API token as an environment variable ([get your token here](https://replicate.com/account/api-tokens)):
+Before running the tool, go to the following website to get your tokens and set them as environment variables:
+1. Replicate API: https://replicate.com/account/api-tokens.
+2. Stability AI: https://platform.stability.ai/account/keys.
+3. Pi API: https://piapi.ai/workspace/kling.
 
 ```bash
 export REPLICATE_API_TOKEN=your_replicate_api_token
 export STABILITY_AI_API_KEY=your_stability_ai_api_key
+export PI_API_KEY=your_pi_api_key
 ```
 
 Then, launch the tool with:

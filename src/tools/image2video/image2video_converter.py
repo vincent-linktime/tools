@@ -1,4 +1,5 @@
 from tools.common.logging import default_logger
+from tools.api.piapi.piapi_client import PiAPIClient
 from tools.api.replicate.replicate_client import ReplicateClient
 from tools.api.stabilityai.stability_ai_client import StabilityAIClient
 from tools.image2video.image2video_models import Image2VideoModelType
@@ -6,6 +7,7 @@ from tools.image2video.image2video_models import Image2VideoModelType
 class Image2VideoConverter:
     def __init__(self):
         self.logger = default_logger
+        self.piapi_client = PiAPIClient()
         self.replicate_client = ReplicateClient()
         self.stabilityai_client = StabilityAIClient()
 
@@ -23,7 +25,10 @@ class Image2VideoConverter:
             self.logger.error("Image2Video Model is not specified")
             return
         
-        if model == Image2VideoModelType.REPLICATE.value:
+        if model == Image2VideoModelType.PIAPI.value:
+            self.logger.debug(f"Generating video using PiAPI model")
+            self.piapi_client.image2video(image_path, prompt, output_video_path)
+        elif model == Image2VideoModelType.REPLICATE.value:
             self.logger.debug(f"Generating video using Replicate model")
             self.replicate_client.image2video(image_path, prompt, output_video_path)
         elif model == Image2VideoModelType.STABILITY.value:
